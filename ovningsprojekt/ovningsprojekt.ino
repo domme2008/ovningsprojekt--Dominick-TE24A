@@ -15,7 +15,7 @@
 // Init constants
 const int servoPin = 9;
 const int fanPin = 10;
-const int thresh_value = 23;
+const int thresh_value = 24;
 
 // Init global variables
 int pos = 0;
