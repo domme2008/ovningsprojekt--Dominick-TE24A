@@ -9,7 +9,6 @@
 
 // Include Libraries
 #include <RTClib.h>
-#include <Wire.h>
 #include <U8glib.h>
 #include <Servo.h>
 
@@ -41,12 +40,16 @@ void setup() {
 }
 
 void loop() {
-  oledWrite(getTime(), getDay(), getTemp()); 
-  servoWrite(getTemp());
-  fanWrite(getTemp());
+  float temp = getTemp();
+  String day = getDay();
+  String time = getTime();
 
-  Serial.println(getTime());
-  Serial.println(getTemp());
+  oledWrite(time, day, temp);
+  servoWrite(temp);
+  fanWrite(temp);
+
+  Serial.println(time);
+  Serial.println(temp);
 
   // Delay for better operating
   delay(200);
@@ -65,7 +68,7 @@ String getTime() {
 // Returns: weekday String
 String getDay() {
   DateTime now = rtc.now();
-  char daysOfTheWeek[7][12] = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
+  char daysOfTheWeek[7][12] = { "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday" };
   return daysOfTheWeek[now.dayOfTheWeek()];
 }
 
@@ -109,10 +112,9 @@ void servoWrite(float temp_value) {
 *Returns: void
 */
 void fanWrite(float temp_value) {
-  if (temp_value >= thresh_value){
+  if (temp_value >= thresh_value) {
     digitalWrite(fanPin, HIGH);
-  }
-  else {
+  } else {
     digitalWrite(fanPin, LOW);
   }
 }
