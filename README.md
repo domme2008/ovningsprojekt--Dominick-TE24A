@@ -1,2 +1,2 @@
-# ovningsprojekt (Dominick TE24A
+# ovningsprojekt (Dominick TE24A)
 
